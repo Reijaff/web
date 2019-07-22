@@ -1,4 +1,4 @@
-function countNeighbours(data, row, col) {
+function countNeighbours(data, row, col) {                                               
     let count = 0;
     let copy_row_minus, copy_col_minus, copy_col_plus, copy_row_plus;
 
