@@ -13,6 +13,10 @@ function romanNumerals(number) {
             number -= 500;
             roman += 'D';
             continue;
+        } else if (number - 400 >= 0) {
+            number -= 400;
+            roman += 'CD';
+            continue;
         } else if (number - 100 >= 0) {
             number -= 100;
             roman += 'C';
@@ -24,6 +28,10 @@ function romanNumerals(number) {
         } else if (number - 50 >= 0) {
             number -= 50;
             roman += 'L';
+            continue;
+        } else if (number - 40 >= 0) {
+            number -= 40;
+            roman += 'XL';
             continue;
         } else if (number - 10 >= 0) {
             number -= 10;
