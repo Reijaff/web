@@ -1,4 +1,7 @@
+require('custom-env').env();
+
 /**********************************************\
+ *
  * 3. FCC Mongo & Mongoose Challenges
  * ==================================
  ***********************************************/
@@ -11,6 +14,7 @@
 // Add `mongodb` and `mongoose` to the project's `package.json`. Then require
 // `mongoose`. Store your **mLab** database URI in the private `.env` file
 // as `MONGO_URI`. Connect to the database using `mongoose.connect(<Your URI>)`
+//
 const mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_URI);
 
@@ -44,6 +48,7 @@ var personSchema = new mongoose.Schema({
     age: Number,
     favoriteFoods: [String],
 });
+
 var Person = mongoose.model('Person', personSchema); /* = <Your Model> */
 
 var createAndSavePerson = function(done) {
@@ -57,6 +62,7 @@ var createAndSavePerson = function(done) {
         done(null, data);
     });
 };
+
 // **Note**: Glitch is a real server, and in real servers interactions with
 // the db are placed in handler functions, to be called when some event happens
 // (e.g. someone hits an endpoint on your API). We'll follow the same approach
@@ -101,11 +107,26 @@ var createAndSavePerson = function(done) {
 // as the 1st argument, and saves them all in the db.
 // Create many people using `Model.create()`, using the function argument
 // 'arrayOfPeople'.
-
+var arrayOfPeople = [
+    {
+        name: 'Mary',
+        age: 23,
+        favouriteFoods: ['delfood'],
+    },
+    {
+        name: 'Ben3',
+        age: 23,
+        favouriteFoods: ['dkfjd'],
+    },
+];
 var createManyPeople = function(arrayOfPeople, done) {
-    done(null /*, data*/);
+    Person.create(arrayOfPeople, function(err, data) {
+        if (err) {
+            done(err);
+        }
+        done(null, data);
+    });
 };
-
 /** # C[R]UD part II - READ #
 /*  ========================= */
 
@@ -116,11 +137,14 @@ var createManyPeople = function(arrayOfPeople, done) {
 // object ) as the first argument, and returns an **array** of matches.
 // It supports an extremely wide range of search options. Check it in the docs.
 // Use the function argument `personName` as search key.
-
+var personName = 'Ben2';
 var findPeopleByName = function(personName, done) {
-    done(null /*, data*/);
-};
+    Person.find({name: personName}, function(err, data) {
+        if (err) done(err);
 
+        done(null, data);
+    });
+};
 /** 6) Use `Model.findOne()` */
 
 // `Model.findOne()` behaves like `.find()`, but it returns **only one**
@@ -130,8 +154,13 @@ var findPeopleByName = function(personName, done) {
 // using `Model.findOne() -> Person`. Use the function
 // argument `food` as search key
 
+var food = 'delfood';
 var findOneByFood = function(food, done) {
-    done(null /*, data*/);
+    Person.findOne({favoriteFoods: food}, function(err, data) {
+        if (err) done(err);
+
+        done(null, data);
+    });
 };
 
 /** 7) Use `Model.findById()` */
@@ -142,9 +171,13 @@ var findOneByFood = function(food, done) {
 // method for it. Find the (only!!) person having a certain Id,
 // using `Model.findById() -> Person`.
 // Use the function argument 'personId' as search key.
-
+var personId = 1;
 var findPersonById = function(personId, done) {
-    done(null /*, data*/);
+    Person.findById(personId, function(err, data) {
+        if (err) done(err);
+
+        done(null, data);
+    });
 };
 
 /** # CR[U]D part III - UPDATE # 
@@ -170,14 +203,18 @@ var findPersonById = function(personId, done) {
 // `favoriteFoods` as an `Array` without specifying the type (i.e. `[String]`).
 // In that case `favoriteFoods` defaults to `Mixed` type, and you have to
 // manually mark it as edited using `document.markModified('edited-field')`
-// (http://mongoosejs.com/docs/schematypes.html - #Mixed )
-
+// (PersonModel://mongoosejs.com/docs/schematypes.html - #Mixed )
 var findEditThenSave = function(personId, done) {
     var foodToAdd = 'hamburger';
+    Person.findById(personId, function(err, data) {
+        if (err) {
+            done(err);
+        }
 
-    done(null /*, data*/);
+        data.favoriteFoods.push(foodToAdd);
+        data.save((err, data) => (err ? done(err) : done(null, data)));
+    });
 };
-
 /** 9) New Update : Use `findOneAndUpdate()` */
 
 // Recent versions of `mongoose` have methods to simplify documents updating.
@@ -192,13 +229,21 @@ var findEditThenSave = function(personId, done) {
 // you need to pass the options document `{ new: true }` as the 3rd argument
 // to `findOneAndUpdate()`. By default the method
 // passes the unmodified object to its callback.
-
 var findAndUpdate = function(personName, done) {
     var ageToSet = 20;
 
-    done(null /*, data*/);
+    Person.findOneAndUpdate(
+        {name: personName},
+        {age: ageToSet},
+        {new: true},
+        (err, data) => {
+            if (err) {
+                done(err);
+            }
+            done(null, data);
+        },
+    );
 };
-
 /** # CRU[D] part IV - DELETE #
 /*  =========================== */
 
@@ -210,7 +255,10 @@ var findAndUpdate = function(personName, done) {
 // As usual, use the function argument `personId` as search key.
 
 var removeById = function(personId, done) {
-    done(null /*, data*/);
+    Person.findByIdAndRemove(personId, (err, data) => {
+        if (err) done(err);
+        done(null, data);
+    });
 };
 
 /** 11) Delete many People */
@@ -225,8 +273,12 @@ var removeById = function(personId, done) {
 
 var removeManyPeople = function(done) {
     var nameToRemove = 'Mary';
-
-    done(null /*, data*/);
+    Person.deleteMany({name: nameToRemove}, (err, data) => {
+        if (err) {
+            done(err);
+        }
+        done(null, data);
+    });
 };
 
 /** # C[R]UD part V -  More about Queries # 
@@ -249,10 +301,15 @@ var removeManyPeople = function(done) {
 
 var queryChain = function(done) {
     var foodToSearch = 'burrito';
-
-    done(null /*, data*/);
+    Person.find({favoriteFoods: foodToSearch})
+        .sort({name: 1})
+        .limit(2)
+        .select({age:0})
+        .exec((err, data) => {
+            if (err) done(err);
+            done(null, data);
+        });
 };
-
 /** **Well Done !!**
 /* You completed these challenges, let's go celebrate !
  */
