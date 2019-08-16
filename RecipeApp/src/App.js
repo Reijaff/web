@@ -28,14 +28,11 @@ class App extends Component {
         const recipes = JSON.parse(json);
         this.setState({recipes: recipes});
     }
-    componentDidUpdate() {
-        const recipes = JSON.stringify(this.state.recipes);
-        localStorage.setItem('recipes', recipes);
+    componentDidUpdate() { const recipes = JSON.stringify(this.state.recipes); localStorage.setItem('recipes', recipes);
     }
 
     render() {
         return (
-            /*jshint ignore:start*/
             <div className="App">
                 <header className="App-header">
                     <h1 className="App-title">Recipe Search</h1>
@@ -44,7 +41,6 @@ class App extends Component {
                 <Form getRecipe={this.getRecipe} />
                 <Recipes recipes={this.state.recipes} />
             </div>
-            /*jshint ignore:end*/
         );
     }
 }
