@@ -1,24 +1,22 @@
 function steamrollArray(arr) {
-    let lvl = 0;
-    function flatten(ar, index) {
-        if (!Array.isArray(ar)) {
-            return ar;
+    var flattenedArray = [];
+
+    // Create function that adds an element if it is not an array.
+    // If it is an array, then loops through it and uses recursion on that array.
+    var flatten = function(arg) {
+        if (!Array.isArray(arg)) {
+            flattenedArray.push(arg);
         } else {
-            return flatten(ar[index],0);
-        }
-    }
-    let count = 0;
-    let new_arr = [];
-    for (let i = 0; i < arr.length; i++) {
-        if (Array.isArray(arr[i]) && arr.length > 1) {
-            for (let y = 0; y < arr[i].length; y++) {
-                new_arr.push(flatten(arr[i], y));
+            for (var a in arg) {
+                flatten(arg[a]);
             }
-        } else {
-            new_arr.push(flatten(arr[i], 0));
         }
-    }
-    return new_arr;
+    };
+
+    // Call the function for each element in the array
+    arr.forEach(flatten);
+    return flattenedArray;
 }
 
-console.log(steamrollArray([1, [2], [3, [[4]]]]));
+// test here
+console.log(steamrollArray([1, [2], [3, [[4,5]]]]));

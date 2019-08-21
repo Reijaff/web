@@ -31,3 +31,5 @@ reddit.hot({r: program.subreddit, limit: program.limit}, (err, res) => {
         );
     }
 });
+
+console.log(reddit.__proto__);

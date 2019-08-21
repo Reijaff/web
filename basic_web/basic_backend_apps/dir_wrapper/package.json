@@ -1,5 +1,5 @@
 {
-  "name": "reddit_wrapper",
+  "name": "dir_wrapper",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,10 +7,9 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "Reijaff",
+  "author": "",
   "license": "ISC",
   "dependencies": {
-    "commander": "^3.0.0",
-    "raw.js": "^0.6.0"
+    "commander": "^3.0.0"
   }
 }
