@@ -1,1 +1,12 @@
-**/node_modules/
+/RecipeApp/node_modules
+/basic_web/FreeCodeCamp/Timestamp Microservice/node_modules
+/basic_web/FreeCodeCamp/boilerplate-npm/node_modules
+/basic_web/FreeCodeCamp/boilerplate-mongomongoose/node_modules
+/basic_web/FreeCodeCamp/boilerplate-project-urlshortener/node_modules
+/basic_web/FreeCodeCamp/boilerplate-project-exercisetracker/node_modules
+/basic_web/FreeCodeCamp/boilerplate-infosec/node_modules
+/basic_web/FreeCodeCamp/boilerplate-project-filemetadata/node_modules
+/basic_web/FreeCodeCamp/boilerplate-project-headerparser/node_modules
+/basic_web/basic_backend_apps/dir_wrapper/node_modules
+/basic_web/basic_backend_apps/nodejs_ls/node_modules
+/basic_web/basic_backend_apps/reddit_wrapper/node_modules
