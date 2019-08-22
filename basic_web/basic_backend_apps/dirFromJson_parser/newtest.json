@@ -1,0 +1,83 @@
+{
+    "path": "/home/user1/git/web-projects/basic_web/basic_backend_apps/dir_wrapper",
+    "name": "core",
+    "type": "directory",
+    "children": [
+        {"path": "/dir.js", "name": "dir.js", "type": "file"},
+        {"path": "/newtest.json", "name": "newtest.json", "type": "file"},
+        {
+            "path": "/node_modules",
+            "name": "node_modules",
+            "type": "directory",
+            "children": [
+                {
+                    "path": "/node_modules/commander",
+                    "name": "commander",
+                    "type": "directory",
+                    "children": [
+                        {
+                            "path": "/node_modules/commander/CHANGELOG.md",
+                            "name": "CHANGELOG.md",
+                            "type": "file"
+                        },
+                        {
+                            "path": "/node_modules/commander/LICENSE",
+                            "name": "LICENSE",
+                            "type": "file"
+                        },
+                        {
+                            "path": "/node_modules/commander/Readme.md",
+                            "name": "Readme.md",
+                            "type": "file"
+                        },
+                        {
+                            "path": "/node_modules/commander/index.js",
+                            "name": "index.js",
+                            "type": "file"
+                        },
+                        {
+                            "path": "/node_modules/commander/package.json",
+                            "name": "package.json",
+                            "type": "file"
+                        },
+                        {
+                            "path": "/node_modules/commander/test_dir",
+                            "name": "test_dir",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "path": "/node_modules/commander/test_dir/test_file1",
+                                    "name": "test_file1",
+                                    "type": "file"
+                                },
+                                {
+                                    "path": "/node_modules/commander/test_dir/test_file2",
+                                    "name": "test_file2",
+                                    "type": "file"
+                                }
+                            ]
+                        },
+                        {
+                            "path": "/node_modules/commander/typings",
+                            "name": "typings",
+                            "type": "directory",
+                            "children": [
+                                {
+                                    "path": "/node_modules/commander/typings/index.d.ts",
+                                    "name": "index.d.ts",
+                                    "type": "file"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "path": "/package-lock.json",
+            "name": "package-lock.json",
+            "type": "file"
+        },
+        {"path": "/package.json", "name": "package.json", "type": "file"}
+    ]
+}
